@@ -1,12 +1,18 @@
 package org.example;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class BudgetTracker {
     public static void budgetTracker() throws IOException {
-        Expense expense = new Expense(10, "10th october", EExpenseCategory.cheap, "exampleExpense");
+        Scanner scanner = new Scanner(System.in);
+        double transactionAmount = scanner.nextDouble();
+        Expense expense = new Expense(transactionAmount, "10th october", EExpenseCategory.cheap, "exampleExpense");
         ExpenseStorage expenseStorage = new ExpenseStorage();
         expenseStorage.readFile();
-        expenseStorage.saveFile(expense);
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            expenseStorage.saveFile(expense);
+        } else expenseStorage.removeFile(expense);
     }
 }

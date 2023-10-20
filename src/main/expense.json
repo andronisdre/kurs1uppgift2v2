@@ -1,7 +1,7 @@
 {
   "exampleExpense": {
     "eExpenseCategory": "cheap",
-    "amount": 10.0,
+    "amount": 20.0,
     "date": "10th october",
     "title": "exampleExpense"
   }
