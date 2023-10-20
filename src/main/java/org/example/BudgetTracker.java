@@ -1,13 +1,12 @@
 package org.example;
 
+import java.io.IOException;
+
 public class BudgetTracker {
-    public static void budgetTracker() {
-        System.out.println("budgetTracker method");
-        Transaction transaction = new Transaction(0,"");
-        System.out.println(transaction);
-        Income income = new Income(10, "october 10th", EIncomeCategory.cheap);
-        System.out.println(income);
-        Expense expense = new Expense(5, "another date", EExpenseCategory.cheap);
-        System.out.println(expense);
+    public static void budgetTracker() throws IOException {
+        Expense expense = new Expense(10, "10th october", EExpenseCategory.cheap, "exampleExpense");
+        ExpenseStorage expenseStorage = new ExpenseStorage();
+        expenseStorage.readFile();
+        expenseStorage.saveFile(expense);
     }
 }
