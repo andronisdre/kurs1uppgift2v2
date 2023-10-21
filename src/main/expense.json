@@ -1,8 +1,32 @@
 {
   "exampleExpense": {
     "eExpenseCategory": "cheap",
-    "amount": 124.6,
-    "date": "month: 10, day: 22, year: 2023",
+    "amount": 132.7,
+    "date": "Date added: month: 10, day: 22, year: 2023",
     "title": "exampleExpense"
+  },
+  "expense": {
+    "eExpenseCategory": "cheap",
+    "amount": 14.0,
+    "date": "Date added: month: 10, day: 22, year: 2023",
+    "title": "expense"
+  },
+  "testingMore": {
+    "eExpenseCategory": "cheap",
+    "amount": 92.0,
+    "date": "Date added: month: 10, day: 22, year: 2023",
+    "title": "testingMore"
+  },
+  "spac": {
+    "eExpenseCategory": "cheap",
+    "amount": 16.0,
+    "date": "Date added: month: 10, day: 22, year: 2023",
+    "title": "spac"
+  },
+  "more": {
+    "eExpenseCategory": "cheap",
+    "amount": 18.0,
+    "date": "Date added: month: 10, day: 22, year: 2023",
+    "title": "more"
   }
 }
