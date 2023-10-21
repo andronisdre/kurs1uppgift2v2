@@ -1,13 +1,11 @@
 package org.example;
 
-import java.util.GregorianCalendar;
-
 public class Transaction {
     private double amount;
     private String date;
     private String title;
 
-    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+
 
     public Transaction(double amount, String date, String title) {
         this.amount = amount;
