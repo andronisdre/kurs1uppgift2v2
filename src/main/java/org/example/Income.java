@@ -7,4 +7,8 @@ public class Income extends Transaction {
         super(amount, date, title);
         this.eIncomeCategory = EIncomeCategory.cheap;
     }
+
+    public Income(String title) {
+        super(title);
+    }
 }

@@ -13,6 +13,10 @@ public class Transaction {
         this.title = title;
     }
 
+    public Transaction(String title) {
+        this.title = title;
+    }
+
     public double getAmount() {
         return amount;
     }
