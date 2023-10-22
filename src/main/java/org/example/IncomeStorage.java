@@ -16,16 +16,18 @@ public class IncomeStorage {
     public IncomeStorage() {
     }
 
-    public void readFile() throws IOException {
+    public void readFile(boolean andList) throws IOException {
         Type type = new TypeToken<Map<String, Income>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         incomeList = gson.fromJson(reader, type);
 
-        System.out.println("income List:");
-        for(String name : incomeList.keySet()) {
-            System.out.println("Key: " + name);
+        if (andList) {
+            System.out.println("income List:");
+            for(String name : incomeList.keySet()) {
+                System.out.println("Key: " + name);
+            }
+            System.out.println("incomeList size " + incomeList.size());
         }
-        System.out.println("incomeList size " + incomeList.size());
     }
 
 
