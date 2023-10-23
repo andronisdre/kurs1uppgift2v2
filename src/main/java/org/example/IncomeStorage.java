@@ -54,11 +54,8 @@ public class IncomeStorage {
         System.out.println("income changed!");
     }
     public void incomesSubtractedByExpenses() throws IOException {
-        Type type = new TypeToken<Map<String, Income>>(){}.getType();
-        Reader reader = new FileReader(new File(fileName));
-        incomeList = gson.fromJson(reader, type);
-
-
+        readFile(false);
+        Income income;
     }
 
     public Map<String, Income> getIncomeList() {
