@@ -46,4 +46,20 @@ public class IncomeStorage {
         fw.close();
         System.out.println("income removed!");
     }
+    public void changeFile(Income existing, Income income) throws IOException {
+        if (incomeList.containsKey(existing.getTitle())) {
+            incomeList.replace(existing.getTitle(), income);
+            FileWriter fw = new FileWriter(new File(fileName));
+            gson.toJson(incomeList, fw);
+            fw.close();
+            System.out.println("income changed!");
+        } else System.out.println("income doesnt exist in the list");
+    }
+    public void incomesSubtractedByExpenses() throws IOException {
+        Type type = new TypeToken<Map<String, Income>>(){}.getType();
+        Reader reader = new FileReader(new File(fileName));
+        incomeList = gson.fromJson(reader, type);
+
+
+    }
 }

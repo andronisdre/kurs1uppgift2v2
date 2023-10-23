@@ -7,4 +7,8 @@ public class Expense extends Transaction {
         super(amount, date, title);
         this.eExpenseCategory = EExpenseCategory.cheap;
     }
+
+    public Expense(String title) {
+        super(title);
+    }
 }

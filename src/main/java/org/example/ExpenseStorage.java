@@ -16,16 +16,18 @@ public class ExpenseStorage {
     public ExpenseStorage() {
     }
 
-    public void readFile() throws IOException {
+    public void readFile(boolean andList) throws IOException {
         Type type = new TypeToken<Map<String, Expense>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         expenseList = gson.fromJson(reader, type);
 
-        System.out.println("expense List:");
-        for(String name : expenseList.keySet()) {
-            System.out.println("Key: " + name);
+        if (andList) {
+            System.out.println("expense List:");
+            for(String name : expenseList.keySet()) {
+                System.out.println("Key: " + name);
+            }
+            System.out.println("expenseList size " + expenseList.size());
         }
-        System.out.println("expenseList size " + expenseList.size());
     }
 
 

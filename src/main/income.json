@@ -1,14 +1,20 @@
 {
   "coolIncome": {
     "eIncomeCategory": "cheap",
-    "amount": 15.6,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "coolIncome"
+    "amount": 17.0,
+    "date": "Date added: month: 10, day: 23, year: 2023",
+    "title": "thaOne"
   },
   "XtrEEm": {
     "eIncomeCategory": "cheap",
     "amount": 25.3,
     "date": "Date added: month: 10, day: 22, year: 2023",
     "title": "XtrEEm"
+  },
+  "anothaOne": {
+    "eIncomeCategory": "cheap",
+    "amount": 34.0,
+    "date": "Date added: month: 10, day: 23, year: 2023",
+    "title": "newTitle"
   }
 }
