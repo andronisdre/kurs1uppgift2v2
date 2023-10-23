@@ -11,15 +11,20 @@ public class BudgetTracker {
     public static void budgetTracker() throws IOException {
         System.out.println("Hello, do you wish to handle incomes or expenses?");
         System.out.println("press 1 for incomes and 2 for expenses");
-        int choice = scanner.nextInt();
-        System.out.println("you chose option: " + choice);
-        if (choice == 1) {
-            incomeChoices(choice);
-        } else if (choice == 2) {
-            expenseChoices(choice);
-        } else System.out.println("you need to choose 1 or 2!");
+        boolean keepGoing = true;
+        while (keepGoing) {
+            int choice = scanner.nextInt();
+            System.out.println("you chose option: " + choice);
+            if (choice == 1) {
+                incomeChoices(choice, keepGoing);
+                keepGoing = false;
+            } else if (choice == 2) {
+                expenseChoices(choice);
+                keepGoing = false;
+            } else System.out.println("you need to choose 1 or 2!");
+        }
     }
-    public static void incomeChoices(int choice) throws IOException {
+    public static void incomeChoices(int choice, boolean keepGoing) throws IOException {
         System.out.println("What option regarding incomes do you want to look at?");
         System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses");
         IncomeStorage incomeStorage = new IncomeStorage();
@@ -40,6 +45,7 @@ public class BudgetTracker {
                 income = new Income(transactionAmount, DayMonthYear, transactionTitle);
                 incomeStorage.readFile(false);
                 incomeStorage.saveFile(income);
+                keepGoing = false;
                 break;
             case 2:
                 System.out.println("chosen: 2: remove incomes");
@@ -48,6 +54,7 @@ public class BudgetTracker {
                 titleOfExistingTransaction = scanner.next();
                 existing = new Income(titleOfExistingTransaction);
                 incomeStorage.removeFile(existing);
+                keepGoing = false;
                 break;
             case 3:
                 System.out.println("chosen: 3: change incomes");
@@ -62,15 +69,18 @@ public class BudgetTracker {
                     transactionAmount = scanner.nextDouble();
                     income = new Income(transactionAmount, DayMonthYear, transactionTitle);
                     incomeStorage.changeFile(existing, income);
+                    keepGoing = false;
                     break;
                 } else System.out.println("this key doesnt exist in the list!"); break;
             case 4:
                 System.out.println("chosen: 4: show all incomes");
                 incomeStorage.readFile(true);
+                keepGoing = false;
                 break;
             case 5:
                 System.out.println("chosen: 5: show incomes subtracted by expenses");
                 incomeStorage.incomesSubtractedByExpenses();
+                keepGoing = false;
                 break;
             default:
                 System.out.println("you need to choose between option 1 through 5!");

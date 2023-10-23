@@ -26,7 +26,7 @@ public class IncomeStorage {
             for(String name : incomeList.keySet()) {
                 System.out.println("Key: " + name);
             }
-            System.out.println("incomeList size " + incomeList.size());
+            System.out.println("incomeList size: " + incomeList.size());
         }
     }
 
@@ -63,5 +63,8 @@ public class IncomeStorage {
 
     public Map<String, Income> getIncomeList() {
         return incomeList;
+    }
+    public void searchIncomes() {
+
     }
 }

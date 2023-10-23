@@ -26,7 +26,7 @@ public class ExpenseStorage {
             for(String name : expenseList.keySet()) {
                 System.out.println("Key: " + name);
             }
-            System.out.println("expenseList size " + expenseList.size());
+            System.out.println("expenseList size: " + expenseList.size());
         }
     }
 
@@ -45,5 +45,8 @@ public class ExpenseStorage {
         gson.toJson(expenseList, fw);
         fw.close();
         System.out.println("expense removed!");
+    }
+    public void searchExpenses() {
+
     }
 }
