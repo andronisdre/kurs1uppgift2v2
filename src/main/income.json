@@ -12,9 +12,21 @@
     "title": "XtrEEm"
   },
   "anothaOne": {
-    "eIncomeCategory": "cheap",
-    "amount": 34.0,
+    "eIncomeCategory": "medium",
+    "amount": 423.0,
     "date": "Date added: month: 10, day: 23, year: 2023",
-    "title": "newTitle"
+    "title": "anotherMedium"
+  },
+  "mediumIncome": {
+    "eIncomeCategory": "medium",
+    "amount": 143.0,
+    "date": "Date added: month: 10, day: 23, year: 2023",
+    "title": "mediumIncome"
+  },
+  "expensiveIncome": {
+    "eIncomeCategory": "expensive",
+    "amount": 2023.0,
+    "date": "Date added: month: 10, day: 23, year: 2023",
+    "title": "expensiveIncome"
   }
 }

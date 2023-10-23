@@ -37,7 +37,7 @@ public class BudgetTracker {
                 transactionTitle = scanner.next();
                 System.out.println("write amount of transaction");
                 transactionAmount = scanner.nextDouble();
-                income = new Income(transactionAmount, DayMonthYear, EIncomeCategory.cheap, transactionTitle);
+                income = new Income(transactionAmount, DayMonthYear, transactionTitle);
                 incomeStorage.readFile(false);
                 incomeStorage.saveFile(income);
                 break;
@@ -55,13 +55,15 @@ public class BudgetTracker {
                 System.out.println("type one of the keys in the list above to change that incomes values");
                 titleOfExistingTransaction = scanner.next();
                 existing = new Income(titleOfExistingTransaction);
-                System.out.println("write new title of the income or the same");
-                transactionTitle = scanner.next();
-                System.out.println("write new amount of transaction");
-                transactionAmount = scanner.nextDouble();
-                income = new Income(transactionAmount, DayMonthYear, EIncomeCategory.cheap, transactionTitle);
-                incomeStorage.changeFile(existing, income);
-                break;
+                if (incomeStorage.getIncomeList().containsKey(existing.getTitle())) {
+                    System.out.println("write new title of the income or the same");
+                    transactionTitle = scanner.next();
+                    System.out.println("write new amount of transaction");
+                    transactionAmount = scanner.nextDouble();
+                    income = new Income(transactionAmount, DayMonthYear, transactionTitle);
+                    incomeStorage.changeFile(existing, income);
+                    break;
+                } else System.out.println("this key doesnt exist in the list!"); break;
             case 4:
                 System.out.println("chosen: 4: show all incomes");
                 incomeStorage.readFile(true);
@@ -88,7 +90,7 @@ public class BudgetTracker {
                 System.out.println("write amount of transaction");
                 double transactionAmount = scanner.nextDouble();
                 String DayMonthYear = ("Date added: month: " + (gregorianCalendar.get(Calendar.MONTH) + 1) + ", day: " + gregorianCalendar.get(Calendar.DATE) + ", year: " + gregorianCalendar.get(Calendar.YEAR));
-                Expense expense = new Expense(transactionAmount, DayMonthYear, EExpenseCategory.cheap, transactionTitle);
+                Expense expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
                 expenseStorage.readFile(false);
                 scanner.nextLine();
                 expenseStorage.saveFile(expense);
