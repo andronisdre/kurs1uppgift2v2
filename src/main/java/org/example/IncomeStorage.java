@@ -47,16 +47,26 @@ public class IncomeStorage {
         System.out.println("income removed!");
     }
     public void changeFile(Income existing, Income income) throws IOException {
-        incomeList.replace(existing.getTitle(), income);
+        //incomeList.replace(existing.getTitle(), income);
+        incomeList.remove(existing.getTitle());
+        incomeList.put(income.getTitle(), income);
         FileWriter fw = new FileWriter(new File(fileName));
         gson.toJson(incomeList, fw);
         fw.close();
         System.out.println("income changed!");
     }
     public void incomesSubtractedByExpenses() throws IOException {
+        System.out.println("incomesSubtractedByExpenses method");
         readFile(false);
-        Income income;
-        System.out.println(incomeList.keySet());
+        double totalAmount = 0;
+        for(String name : incomeList.keySet()) {
+            Income income = new Income(name);
+            double currentAmount = income.getAmount();
+            System.out.println(income.getAmount());
+            System.out.println(name + " amount: " + income.getAmount());
+            totalAmount += currentAmount;
+        }
+        System.out.println("total amount incomes: " + totalAmount);
     }
 
     public Map<String, Income> getIncomeList() {

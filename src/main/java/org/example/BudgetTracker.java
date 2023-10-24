@@ -40,10 +40,10 @@ public class BudgetTracker {
         Income existing;
         String DayMonthYear = ("Date added: month: " + (gregorianCalendar.get(Calendar.MONTH) + 1) + ", day: " + gregorianCalendar.get(Calendar.DATE) + ", year: " + gregorianCalendar.get(Calendar.YEAR));
         choice = scanner.nextInt();
+        System.out.println("chosen: " + choice);
         while (keepGoing) {
             switch (choice) {
                 case 1:
-                    System.out.println("chosen: 1: add incomes");
                     System.out.println("write title of income");
                     transactionTitle = scanner.next();
                     existing = new Income(transactionTitle);
@@ -63,16 +63,16 @@ public class BudgetTracker {
                         break;
                     }
                 case 2:
-                    System.out.println("chosen: 2: remove incomes");
                     incomeStorage.readFile(true);
                     System.out.println("type one of the keys in the list above to remove that income from the list");
                     titleOfExistingTransaction = scanner.next();
                     existing = new Income(titleOfExistingTransaction);
-                    incomeStorage.removeFile(existing);
-                    keepGoing = false;
-                    break;
+                    if (incomeStorage.getIncomeList().containsKey(existing.getTitle())) {
+                        incomeStorage.removeFile(existing);
+                        keepGoing = false;
+                        break;
+                    } else System.out.println("this key doesnt exist in the list!"); System.out.println("-------------------------------"); break;
                 case 3:
-                    System.out.println("chosen: 3: change incomes");
                     incomeStorage.readFile(true);
                     System.out.println("type one of the keys in the list above to change that incomes values");
                     titleOfExistingTransaction = scanner.next();
@@ -88,17 +88,16 @@ public class BudgetTracker {
                         break;
                     } else System.out.println("this key doesnt exist in the list!"); System.out.println("-------------------------------"); break;
                 case 4:
-                    System.out.println("chosen: 4: show all incomes");
                     incomeStorage.readFile(true);
                     keepGoing = false;
                     break;
                 case 5:
-                    System.out.println("chosen: 5: show incomes subtracted by expenses");
                     incomeStorage.incomesSubtractedByExpenses();
                     keepGoing = false;
                     break;
                 default:
                     System.out.println("you need to choose between option 1 through 5!");
+                    choice = scanner.nextInt();
                     break;
             }
         }
