@@ -46,13 +46,22 @@ public class BudgetTracker {
                     System.out.println("chosen: 1: add incomes");
                     System.out.println("write title of income");
                     transactionTitle = scanner.next();
-                    System.out.println("write amount of transaction");
-                    transactionAmount = scanner.nextDouble();
-                    income = new Income(transactionAmount, DayMonthYear, transactionTitle);
+                    existing = new Income(transactionTitle);
                     incomeStorage.readFile(false);
-                    incomeStorage.saveFile(income);
-                    keepGoing = false;
-                    break;
+                    if (incomeStorage.getIncomeList().containsKey(existing.getTitle())) {
+                        System.out.println("the title of this income already exists! please write a unique title!");
+                        incomeStorage.readFile(true);
+                        System.out.println("write an income unique to the ones listed above");
+                        break;
+                    } else {
+                        System.out.println("write amount of transaction");
+                        transactionAmount = scanner.nextDouble();
+                        income = new Income(transactionAmount, DayMonthYear, transactionTitle);
+                        incomeStorage.readFile(false);
+                        incomeStorage.saveFile(income);
+                        keepGoing = false;
+                        break;
+                    }
                 case 2:
                     System.out.println("chosen: 2: remove incomes");
                     incomeStorage.readFile(true);

@@ -56,6 +56,7 @@ public class IncomeStorage {
     public void incomesSubtractedByExpenses() throws IOException {
         readFile(false);
         Income income;
+        System.out.println(incomeList.keySet());
     }
 
     public Map<String, Income> getIncomeList() {

@@ -34,5 +34,29 @@
     "amount": 121.0,
     "date": "Date added: month: 10, day: 23, year: 2023",
     "title": "TheIncome"
+  },
+  "moreTests": {
+    "eIncomeCategory": "cheap",
+    "amount": 42.0,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "moreTests"
+  },
+  "tester": {
+    "eIncomeCategory": "cheap",
+    "amount": 48.0,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "tester"
+  },
+  "works?": {
+    "eIncomeCategory": "cheap",
+    "amount": 71.0,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "works?"
+  },
+  "itWorks": {
+    "eIncomeCategory": "cheap",
+    "amount": 79.0,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "itWorks"
   }
 }
