@@ -1,32 +1,26 @@
 {
-  "exampleExpense": {
+  "newExpense": {
     "eExpenseCategory": "cheap",
-    "amount": 132.7,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "exampleExpense"
+    "amount": 31.0,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "newExpense"
   },
-  "expense": {
-    "eExpenseCategory": "cheap",
-    "amount": 14.0,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "expense"
+  "newName": {
+    "eExpenseCategory": "expensive",
+    "amount": 1031.1,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "newName"
   },
-  "testingMore": {
-    "eExpenseCategory": "cheap",
-    "amount": 92.0,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "testingMore"
+  "adding": {
+    "eExpenseCategory": "medium",
+    "amount": 191.9,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "adding"
   },
-  "spac": {
+  "willWork": {
     "eExpenseCategory": "cheap",
-    "amount": 16.0,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "spac"
-  },
-  "more": {
-    "eExpenseCategory": "cheap",
-    "amount": 18.0,
-    "date": "Date added: month: 10, day: 22, year: 2023",
-    "title": "more"
+    "amount": 52.8,
+    "date": "Date added: month: 10, day: 24, year: 2023",
+    "title": "willWork"
   }
 }

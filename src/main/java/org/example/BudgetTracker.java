@@ -9,7 +9,12 @@ public class BudgetTracker {
     public static Scanner scanner = new Scanner(System.in);
     private static GregorianCalendar gregorianCalendar = new GregorianCalendar();
     private static boolean keepGoing = true;
+    private static IncomeStorage incomeStorage = new IncomeStorage();
+    private static ExpenseStorage expenseStorage = new ExpenseStorage();
+
     public static void budgetTracker() throws IOException {
+        incomeStorage.readFile(false, false);
+        expenseStorage.readFile(false, false);
         System.out.println("Hello, do you wish to handle incomes or expenses?");
         while (keepGoing) {
             try {
@@ -29,10 +34,10 @@ public class BudgetTracker {
             }
         }
     }
+
     public static void incomeChoices(int choice) throws IOException {
         System.out.println("What option regarding incomes do you want to look at?");
         System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses");
-        IncomeStorage incomeStorage = new IncomeStorage();
         String titleOfExistingTransaction;
         String transactionTitle;
         double transactionAmount;
@@ -47,23 +52,22 @@ public class BudgetTracker {
                     System.out.println("write title of income");
                     transactionTitle = scanner.next();
                     existing = new Income(transactionTitle);
-                    incomeStorage.readFile(false);
                     if (incomeStorage.getIncomeList().containsKey(existing.getTitle())) {
                         System.out.println("the title of this income already exists! please write a unique title!");
-                        incomeStorage.readFile(true);
+                        System.out.println("-------------------------------");
+                        incomeStorage.readFile(true, false);
                         System.out.println("write an income unique to the ones listed above");
                         break;
                     } else {
-                        System.out.println("write amount of transaction");
+                        System.out.println("write amount of income");
                         transactionAmount = scanner.nextDouble();
                         income = new Income(transactionAmount, DayMonthYear, transactionTitle);
-                        incomeStorage.readFile(false);
                         incomeStorage.saveFile(income);
                         keepGoing = false;
                         break;
                     }
                 case 2:
-                    incomeStorage.readFile(true);
+                    incomeStorage.readFile(true, false);
                     System.out.println("type one of the keys in the list above to remove that income from the list");
                     titleOfExistingTransaction = scanner.next();
                     existing = new Income(titleOfExistingTransaction);
@@ -71,9 +75,11 @@ public class BudgetTracker {
                         incomeStorage.removeFile(existing);
                         keepGoing = false;
                         break;
-                    } else System.out.println("this key doesnt exist in the list!"); System.out.println("-------------------------------"); break;
+                    } else System.out.println("this key doesnt exist in the list!");
+                    System.out.println("-------------------------------");
+                    break;
                 case 3:
-                    incomeStorage.readFile(true);
+                    incomeStorage.readFile(true, false);
                     System.out.println("type one of the keys in the list above to change that incomes values");
                     titleOfExistingTransaction = scanner.next();
                     existing = new Income(titleOfExistingTransaction);
@@ -86,9 +92,11 @@ public class BudgetTracker {
                         incomeStorage.changeFile(existing, income);
                         keepGoing = false;
                         break;
-                    } else System.out.println("this key doesnt exist in the list!"); System.out.println("-------------------------------"); break;
+                    } else System.out.println("this key doesnt exist in the list!");
+                    System.out.println("-------------------------------");
+                    break;
                 case 4:
-                    incomeStorage.readFile(true);
+                    incomeStorage.readFile(true, true);
                     keepGoing = false;
                     break;
                 case 5:
@@ -102,47 +110,82 @@ public class BudgetTracker {
             }
         }
     }
+
     public static void expenseChoices(int choice) throws IOException {
         System.out.println("What option regarding expenses do you want to look at?");
         System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses");
-        ExpenseStorage expenseStorage = new ExpenseStorage();
+        String titleOfExistingTransaction;
+        String transactionTitle;
+        double transactionAmount;
+        Expense expense;
+        Expense existing;
+        String DayMonthYear = ("Date added: month: " + (gregorianCalendar.get(Calendar.MONTH) + 1) + ", day: " + gregorianCalendar.get(Calendar.DATE) + ", year: " + gregorianCalendar.get(Calendar.YEAR));
         choice = scanner.nextInt();
-        switch (choice) {
-            case 1:
-                System.out.println("1: add expenses");
-                System.out.println("write title of income");
-                String transactionTitle = scanner.next();
-                System.out.println("write amount of transaction");
-                double transactionAmount = scanner.nextDouble();
-                String DayMonthYear = ("Date added: month: " + (gregorianCalendar.get(Calendar.MONTH) + 1) + ", day: " + gregorianCalendar.get(Calendar.DATE) + ", year: " + gregorianCalendar.get(Calendar.YEAR));
-                Expense expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
-                expenseStorage.readFile(false);
-                scanner.nextLine();
-                expenseStorage.saveFile(expense);
-                break;
-            case 2:
-                System.out.println("chosen: 2: remove expenses");
-                expenseStorage.readFile(true);
-                System.out.println("type one of the keys in the list above to remove that expense from the list");
-                String titleOfTransaction = scanner.next();
-                Expense existing = new Expense(titleOfTransaction);
-                expenseStorage.removeFile(existing);
-                break;
-            case 3:
-                System.out.println("3: change expenses");
-                break;
-            case 4:
-                System.out.println("4: show all expenses");
-                expenseStorage.readFile(true);
-                break;
-            case 5:
-                System.out.println("5: show incomes subtracted by expenses");
-                IncomeStorage incomeStorage = new IncomeStorage();
-                incomeStorage.incomesSubtractedByExpenses();
-                break;
-            default:
-                System.out.println("you need to choose between option 1 through 5!");
-                break;
+        System.out.println("chosen: " + choice);
+        while (keepGoing) {
+            switch (choice) {
+                case 1:
+                    System.out.println("write title of expense");
+                    transactionTitle = scanner.next();
+                    existing = new Expense(transactionTitle);
+                    if (expenseStorage.getExpenseList().containsKey(existing.getTitle())) {
+                        System.out.println("the title of this expense already exists! please write a unique title!");
+                        System.out.println("-------------------------------");
+                        expenseStorage.readFile(true, false);
+                        System.out.println("write an expense unique to the ones listed above");
+                        break;
+                    } else {
+                        System.out.println("write amount of expense");
+                        transactionAmount = scanner.nextDouble();
+                        expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
+                        expenseStorage.saveFile(expense);
+                        keepGoing = false;
+                        break;
+                    }
+                case 2:
+                    expenseStorage.readFile(true, false);
+                    System.out.println("type one of the keys in the list above to remove that expense from the list");
+                    titleOfExistingTransaction = scanner.next();
+                    existing = new Expense(titleOfExistingTransaction);
+                    if (expenseStorage.getExpenseList().containsKey(existing.getTitle())) {
+                        expenseStorage.removeFile(existing);
+                        keepGoing = false;
+                        break;
+                    } else System.out.println("this key doesnt exist in the list!");
+                    System.out.println("-------------------------------");
+                    break;
+                case 3:
+                    expenseStorage.readFile(true, false);
+                    System.out.println("type one of the keys in the list above to change that expenses values");
+                    titleOfExistingTransaction = scanner.next();
+                    existing = new Expense(titleOfExistingTransaction);
+                    if (expenseStorage.getExpenseList().containsKey(existing.getTitle())) {
+                        System.out.println("write new title of the expense or the same");
+                        transactionTitle = scanner.next();
+                        System.out.println("write new amount of transaction");
+                        transactionAmount = scanner.nextDouble();
+                        expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
+                        expenseStorage.changeFile(existing, expense);
+                        keepGoing = false;
+                        break;
+                    } else System.out.println("this key doesnt exist in the list!");
+                    System.out.println("-------------------------------");
+                    break;
+                case 4:
+                    expenseStorage.readFile(true, true);
+                    keepGoing = false;
+                    break;
+                case 5:
+                    IncomeStorage incomeStorage = new IncomeStorage();
+                    incomeStorage.incomesSubtractedByExpenses();
+                    keepGoing = false;
+                    break;
+                default:
+                    System.out.println("you need to choose between option 1 through 5!");
+                    choice = scanner.nextInt();
+                    break;
+            }
         }
     }
 }
+

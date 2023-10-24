@@ -16,7 +16,7 @@ public class IncomeStorage {
     public IncomeStorage() {
     }
 
-    public void readFile(boolean andList) throws IOException {
+    public void readFile(boolean andList, boolean andValues) throws IOException {
         Type type = new TypeToken<Map<String, Income>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         incomeList = gson.fromJson(reader, type);
@@ -24,9 +24,9 @@ public class IncomeStorage {
         if (andList) {
             System.out.println("income List:");
             for(String name : incomeList.keySet()) {
-                System.out.println("Key: " + name);
+                System.out.print("Key: " + name); if (andValues) System.out.print(incomeList.get(name));
+                System.out.println();
             }
-            System.out.println("incomeList size: " + incomeList.size());
         }
     }
 
@@ -56,7 +56,7 @@ public class IncomeStorage {
         System.out.println("income changed!");
     }
     public void incomesSubtractedByExpenses() throws IOException {
-        readFile(false);
+        readFile(false, false);
         double totalAmountIncomes = 0;
         for (String name : incomeList.keySet()) {
             Income income = incomeList.get(name);
@@ -65,7 +65,7 @@ public class IncomeStorage {
         }
         System.out.println("total amount incomes: " + totalAmountIncomes);
         ExpenseStorage expenseStorage = new ExpenseStorage();
-        expenseStorage.readFile(false);
+        expenseStorage.readFile(false, false);
         double totalAmountExpenses = 0;
         for (String name : expenseStorage.getExpenseList().keySet()) {
             Expense expense = expenseStorage.getExpenseList().get(name);

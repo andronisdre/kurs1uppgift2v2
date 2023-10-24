@@ -15,4 +15,9 @@ public class Income extends Transaction {
     public Income(String title) {
         super(title);
     }
+    @Override
+    public String toString() {
+        return ", type: Income {" +
+                "Category: " + eIncomeCategory + super.toString() + '}';
+    }
 }

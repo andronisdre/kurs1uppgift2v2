@@ -15,4 +15,10 @@ public class Expense extends Transaction {
     public Expense(String title) {
         super(title);
     }
+
+    @Override
+    public String toString() {
+        return ", type: Expense {" +
+                "Category: " + eExpenseCategory + super.toString() + '}';
+    }
 }

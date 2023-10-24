@@ -16,17 +16,16 @@ public class ExpenseStorage {
     public ExpenseStorage() {
     }
 
-    public void readFile(boolean andList) throws IOException {
+    public void readFile(boolean andList, boolean andValues) throws IOException {
         Type type = new TypeToken<Map<String, Expense>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         expenseList = gson.fromJson(reader, type);
-
         if (andList) {
-            System.out.println("expense List:");
+            System.out.println("expense List: ");
             for(String name : expenseList.keySet()) {
-                System.out.println("Key: " + name);
+                System.out.print("Key: " + name); if (andValues) System.out.print(expenseList.get(name));
+                System.out.println();
             }
-            System.out.println("expenseList size: " + expenseList.size());
         }
     }
 
@@ -45,6 +44,14 @@ public class ExpenseStorage {
         gson.toJson(expenseList, fw);
         fw.close();
         System.out.println("expense removed!");
+    }
+    public void changeFile(Expense existing, Expense expense) throws IOException {
+        expenseList.remove(existing.getTitle());
+        expenseList.put(expense.getTitle(), expense);
+        FileWriter fw = new FileWriter(new File(fileName));
+        gson.toJson(expenseList, fw);
+        fw.close();
+        System.out.println("expense changed!");
     }
     public void searchExpenses() {
 
