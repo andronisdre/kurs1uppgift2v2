@@ -137,6 +137,8 @@ public class BudgetTracker {
                 break;
             case 5:
                 System.out.println("5: show incomes subtracted by expenses");
+                IncomeStorage incomeStorage = new IncomeStorage();
+                incomeStorage.incomesSubtractedByExpenses();
                 break;
             default:
                 System.out.println("you need to choose between option 1 through 5!");

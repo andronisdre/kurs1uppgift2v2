@@ -49,4 +49,8 @@ public class ExpenseStorage {
     public void searchExpenses() {
 
     }
+
+    public Map<String, Expense> getExpenseList() {
+        return expenseList;
+    }
 }

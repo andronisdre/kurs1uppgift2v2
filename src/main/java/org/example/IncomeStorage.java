@@ -56,17 +56,24 @@ public class IncomeStorage {
         System.out.println("income changed!");
     }
     public void incomesSubtractedByExpenses() throws IOException {
-        System.out.println("incomesSubtractedByExpenses method");
         readFile(false);
-        double totalAmount = 0;
-        for(String name : incomeList.keySet()) {
-            Income income = new Income(name);
-            double currentAmount = income.getAmount();
-            System.out.println(income.getAmount());
-            System.out.println(name + " amount: " + income.getAmount());
-            totalAmount += currentAmount;
+        double totalAmountIncomes = 0;
+        for (String name : incomeList.keySet()) {
+            Income income = incomeList.get(name);
+            //System.out.println(name + " amount: " + income.getAmount());
+            totalAmountIncomes += income.getAmount();
         }
-        System.out.println("total amount incomes: " + totalAmount);
+        System.out.println("total amount incomes: " + totalAmountIncomes);
+        ExpenseStorage expenseStorage = new ExpenseStorage();
+        expenseStorage.readFile(false);
+        double totalAmountExpenses = 0;
+        for (String name : expenseStorage.getExpenseList().keySet()) {
+            Expense expense = expenseStorage.getExpenseList().get(name);
+            //System.out.println(ExpenseName + " amount: " + expense.getAmount());
+            totalAmountExpenses += expense.getAmount();
+        }
+        System.out.println("total amount expenses: " + totalAmountExpenses);
+        System.out.println("incomes subtracted by expenses: " + (totalAmountIncomes - totalAmountExpenses));
     }
 
     public Map<String, Income> getIncomeList() {
