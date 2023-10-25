@@ -60,7 +60,6 @@ public class IncomeStorage {
         double totalAmountIncomes = 0;
         for (String name : incomeList.keySet()) {
             Income income = incomeList.get(name);
-            //System.out.println(name + " amount: " + income.getAmount());
             totalAmountIncomes += income.getAmount();
         }
         System.out.println("total amount incomes: " + totalAmountIncomes);
@@ -69,7 +68,6 @@ public class IncomeStorage {
         double totalAmountExpenses = 0;
         for (String name : expenseStorage.getExpenseList().keySet()) {
             Expense expense = expenseStorage.getExpenseList().get(name);
-            //System.out.println(ExpenseName + " amount: " + expense.getAmount());
             totalAmountExpenses += expense.getAmount();
         }
         System.out.println("total amount expenses: " + totalAmountExpenses);
@@ -79,7 +77,15 @@ public class IncomeStorage {
     public Map<String, Income> getIncomeList() {
         return incomeList;
     }
-    public void searchIncomes() {
-
+    public void searchIncomes(String search) throws IOException {
+        readFile(false, false);
+        if (incomeList.containsKey(search)) {
+            System.out.println("Key: " + search + incomeList.get(search));
+        } else {
+            System.out.println("this income doesnt exist!");
+            System.out.println("input the name of the income you want to look for");
+            search = BudgetTracker.scanner.next();
+            searchIncomes(search);
+        }
     }
 }

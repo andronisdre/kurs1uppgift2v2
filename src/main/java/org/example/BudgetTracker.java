@@ -15,6 +15,7 @@ public class BudgetTracker {
     public static void budgetTracker() throws IOException {
         incomeStorage.readFile(false, false);
         expenseStorage.readFile(false, false);
+        Transaction expense1 = new Expense("");
         System.out.println("Hello, do you wish to handle incomes or expenses?");
         while (keepGoing) {
             try {
@@ -37,7 +38,7 @@ public class BudgetTracker {
 
     public static void incomeChoices(int choice) throws IOException {
         System.out.println("What option regarding incomes do you want to look at?");
-        System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses");
+        System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses, 6: search for an income");
         String titleOfExistingTransaction;
         String transactionTitle;
         double transactionAmount;
@@ -103,6 +104,12 @@ public class BudgetTracker {
                     incomeStorage.incomesSubtractedByExpenses();
                     keepGoing = false;
                     break;
+                case 6:
+                    System.out.println("input the name of the income you want to look for");
+                    String search = scanner.next();
+                    incomeStorage.searchIncomes(search);
+                    keepGoing = false;
+                    break;
                 default:
                     System.out.println("you need to choose between option 1 through 5!");
                     choice = scanner.nextInt();
@@ -113,7 +120,7 @@ public class BudgetTracker {
 
     public static void expenseChoices(int choice) throws IOException {
         System.out.println("What option regarding expenses do you want to look at?");
-        System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses");
+        System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses, 6: search for an expense");
         String titleOfExistingTransaction;
         String transactionTitle;
         double transactionAmount;
@@ -176,8 +183,13 @@ public class BudgetTracker {
                     keepGoing = false;
                     break;
                 case 5:
-                    IncomeStorage incomeStorage = new IncomeStorage();
                     incomeStorage.incomesSubtractedByExpenses();
+                    keepGoing = false;
+                    break;
+                case 6:
+                    System.out.println("input the name of the expense you want to look for");
+                    String search = scanner.next();
+                    expenseStorage.searchExpenses(search);
                     keepGoing = false;
                     break;
                 default:

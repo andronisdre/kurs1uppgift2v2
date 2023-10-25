@@ -53,8 +53,16 @@ public class ExpenseStorage {
         fw.close();
         System.out.println("expense changed!");
     }
-    public void searchExpenses() {
-
+    public void searchExpenses(String search) throws IOException {
+        readFile(false, false);
+        if (expenseList.containsKey(search)) {
+            System.out.println("Key: " + search + expenseList.get(search));
+        } else {
+            System.out.println("this expense doesnt exist!");
+            System.out.println("input the name of the expense you want to look for");
+            search = BudgetTracker.scanner.next();
+            searchExpenses(search);
+        }
     }
 
     public Map<String, Expense> getExpenseList() {
