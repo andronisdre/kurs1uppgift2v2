@@ -83,9 +83,17 @@ public class IncomeStorage {
             System.out.println("Key: " + search + incomeList.get(search));
         } else {
             System.out.println("this income doesnt exist!");
-            System.out.println("input the name of the income you want to look for");
-            search = BudgetTracker.scanner.next();
-            searchIncomes(search);
+            for(String name : incomeList.keySet()) {
+                boolean yesorno = name.startsWith(search);
+                if (yesorno) {
+                    System.out.println("this income starts with your input: " + incomeList.get(name));
+                } else {
+                    System.out.println("input the name of the income you want to look for");
+                    search = BudgetTracker.scanner.next();
+                    searchIncomes(search);
+                }
+            }
         }
     }
 }
+
