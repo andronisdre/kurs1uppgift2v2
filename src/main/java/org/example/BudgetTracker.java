@@ -15,7 +15,6 @@ public class BudgetTracker {
     public static void budgetTracker() throws IOException {
         incomeStorage.readFile(false, false);
         expenseStorage.readFile(false, false);
-        Transaction expense1 = new Expense("");
         System.out.println("Hello, do you wish to handle incomes or expenses?");
         while (keepGoing) {
             try {
@@ -108,6 +107,19 @@ public class BudgetTracker {
                     System.out.println("input the name of the income you want to look for");
                     String search = scanner.next();
                     incomeStorage.searchIncomes(search);
+                    keepGoing = false;
+                    break;
+                case 7:
+                    System.out.println("input the number of the month you wish to see incomes for");
+                    int monthNumber = scanner.nextInt();
+                    String month = "" + monthNumber;
+                    int endSout = 2;
+                    if (monthNumber < 10) {
+                        month = monthNumber + ",";
+                        endSout = 1;
+                    }
+                    System.out.println("incomes month: " + month.substring(0,endSout));
+                    incomeStorage.readIncomePerMonth(month);
                     keepGoing = false;
                     break;
                 default:
