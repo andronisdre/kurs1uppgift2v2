@@ -56,12 +56,23 @@ public class ExpenseStorage {
     public void searchExpenses(String search) throws IOException {
         readFile(false, false);
         if (expenseList.containsKey(search)) {
-            System.out.println("Key: " + search + expenseList.get(search));
+            System.out.println("this expense matches your input: Key: " + search + expenseList.get(search));
         } else {
-            System.out.println("this expense doesnt exist!");
-            System.out.println("input the name of the expense you want to look for");
-            search = BudgetTracker.scanner.next();
-            searchExpenses(search);
+            boolean yesorno;
+            boolean trueorfalse = false;
+            for(String name : expenseList.keySet()) {
+                yesorno = name.toLowerCase().startsWith(search.toLowerCase());
+                if (yesorno) {
+                    System.out.println("this expense starts with your input: key: " + name + expenseList.get(name));
+                    trueorfalse = true;
+                }
+            }
+            if (!trueorfalse) {
+                System.out.println("this expense doesnt exist!");
+                System.out.println("input the name of the expense you want to look for");
+                search = BudgetTracker.scanner.next();
+                searchExpenses(search);
+            }
         }
     }
 

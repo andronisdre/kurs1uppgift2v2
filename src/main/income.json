@@ -34,5 +34,11 @@
     "amount": 161.0,
     "date": "Date added: month: 10, day: 24, year: 2023",
     "title": "LULE"
+  },
+  "experience": {
+    "eIncomeCategory": "medium",
+    "amount": 301.0,
+    "date": "Date added: month: 10, day: 26, year: 2023",
+    "title": "experience"
   }
 }

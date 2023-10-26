@@ -80,18 +80,22 @@ public class IncomeStorage {
     public void searchIncomes(String search) throws IOException {
         readFile(false, false);
         if (incomeList.containsKey(search)) {
-            System.out.println("Key: " + search + incomeList.get(search));
+            System.out.println("this income matches your input: Key: " + search + incomeList.get(search));
         } else {
-            System.out.println("this income doesnt exist!");
+            boolean yesorno;
+            boolean trueorfalse = false;
             for(String name : incomeList.keySet()) {
-                boolean yesorno = name.startsWith(search);
+                yesorno = name.toLowerCase().startsWith(search.toLowerCase());
                 if (yesorno) {
-                    System.out.println("this income starts with your input: " + incomeList.get(name));
-                } else {
-                    System.out.println("input the name of the income you want to look for");
-                    search = BudgetTracker.scanner.next();
-                    searchIncomes(search);
+                    System.out.println("this income starts with your input: key: " + name + incomeList.get(name));
+                    trueorfalse = true;
                 }
+            }
+            if (!trueorfalse) {
+                System.out.println("this income doesnt exist!");
+                System.out.println("input the name of the income you want to look for");
+                search = BudgetTracker.scanner.next();
+                searchIncomes(search);
             }
         }
     }
