@@ -99,11 +99,12 @@ public class IncomeStorage {
             }
         }
     }
-    public void readIncomePerMonth(String month) throws IOException {
+    public void readIncomePerMonth(int month) throws IOException {
         readFile(false, false);
+        System.out.println("incomes in month: " + month);
         boolean trueornah = false;
         for(String name : incomeList.keySet()) {
-            if (incomeList.get(name).getDate().substring(19,21).contentEquals(month)) {
+            if (incomeList.get(name).getMonth() == month) {
                 System.out.print("Key: " + name); System.out.print(incomeList.get(name));
                 System.out.println();
                 trueornah = true;

@@ -3,8 +3,8 @@ package org.example;
 public class Income extends Transaction {
     private EIncomeCategory eIncomeCategory;
 
-    public Income(double amount, String date, String title) {
-        super(amount, date, title);
+    public Income(double amount, String date, int month, String title) {
+        super(amount, date, month, title);
         if (amount <= 100) {
             this.eIncomeCategory = EIncomeCategory.cheap;
         } else if (amount <= 1000) {

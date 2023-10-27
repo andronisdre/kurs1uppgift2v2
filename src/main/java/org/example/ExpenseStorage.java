@@ -53,6 +53,11 @@ public class ExpenseStorage {
         fw.close();
         System.out.println("expense changed!");
     }
+
+    public Map<String, Expense> getExpenseList() {
+        return expenseList;
+    }
+
     public void searchExpenses(String search) throws IOException {
         readFile(false, false);
         if (expenseList.containsKey(search)) {
@@ -75,8 +80,19 @@ public class ExpenseStorage {
             }
         }
     }
-
-    public Map<String, Expense> getExpenseList() {
-        return expenseList;
+    public void readExpensePerMonth(int month) throws IOException {
+        readFile(false, false);
+        System.out.println("expenses in month: " + month);
+        boolean trueornah = false;
+        for(String name : expenseList.keySet()) {
+            if (expenseList.get(name).getMonth() == month) {
+                System.out.print("Key: " + name); System.out.print(expenseList.get(name));
+                System.out.println();
+                trueornah = true;
+            }
+        }
+        if (!trueornah) {
+            System.out.println("no expenses in the month you typed!");
+        }
     }
 }

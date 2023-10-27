@@ -13,6 +13,7 @@ public class BudgetTracker {
     private static ExpenseStorage expenseStorage = new ExpenseStorage();
 
     public static void budgetTracker() throws IOException {
+        System.out.println(gregorianCalendar.get(Calendar.MONTH) + 1);
         incomeStorage.readFile(false, false);
         expenseStorage.readFile(false, false);
         System.out.println("Hello, do you wish to handle incomes or expenses?");
@@ -37,7 +38,7 @@ public class BudgetTracker {
 
     public static void incomeChoices(int choice) throws IOException {
         System.out.println("What option regarding incomes do you want to look at?");
-        System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses, 6: search for an income");
+        System.out.println("1: add incomes, 2: remove incomes, 3: change incomes, 4: show all incomes, 5: show incomes subtracted by expenses, 6: search for an income, 7: show incomes in specified month");
         String titleOfExistingTransaction;
         String transactionTitle;
         double transactionAmount;
@@ -61,7 +62,7 @@ public class BudgetTracker {
                     } else {
                         System.out.println("write amount of income");
                         transactionAmount = scanner.nextDouble();
-                        income = new Income(transactionAmount, DayMonthYear, transactionTitle);
+                        income = new Income(transactionAmount, DayMonthYear, (gregorianCalendar.get(Calendar.MONTH) + 1), transactionTitle);
                         incomeStorage.saveFile(income);
                         keepGoing = false;
                         break;
@@ -88,7 +89,7 @@ public class BudgetTracker {
                         transactionTitle = scanner.next();
                         System.out.println("write new amount of transaction");
                         transactionAmount = scanner.nextDouble();
-                        income = new Income(transactionAmount, DayMonthYear, transactionTitle);
+                        income = new Income(transactionAmount, DayMonthYear, (gregorianCalendar.get(Calendar.MONTH) + 1), transactionTitle);
                         incomeStorage.changeFile(existing, income);
                         keepGoing = false;
                         break;
@@ -111,14 +112,7 @@ public class BudgetTracker {
                     break;
                 case 7:
                     System.out.println("input the number of the month you wish to see incomes for");
-                    int monthNumber = scanner.nextInt();
-                    String month = "" + monthNumber;
-                    int endSout = 2;
-                    if (monthNumber < 10) {
-                        month = monthNumber + ",";
-                        endSout = 1;
-                    }
-                    System.out.println("incomes month: " + month.substring(0,endSout));
+                    int month = scanner.nextInt();
                     incomeStorage.readIncomePerMonth(month);
                     keepGoing = false;
                     break;
@@ -132,7 +126,7 @@ public class BudgetTracker {
 
     public static void expenseChoices(int choice) throws IOException {
         System.out.println("What option regarding expenses do you want to look at?");
-        System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses, 6: search for an expense");
+        System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses, 6: search for an expense, 7: show expenses in specified month");
         String titleOfExistingTransaction;
         String transactionTitle;
         double transactionAmount;
@@ -156,7 +150,7 @@ public class BudgetTracker {
                     } else {
                         System.out.println("write amount of expense");
                         transactionAmount = scanner.nextDouble();
-                        expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
+                        expense = new Expense(transactionAmount, DayMonthYear, (gregorianCalendar.get(Calendar.MONTH) + 1), transactionTitle);
                         expenseStorage.saveFile(expense);
                         keepGoing = false;
                         break;
@@ -183,7 +177,7 @@ public class BudgetTracker {
                         transactionTitle = scanner.next();
                         System.out.println("write new amount of transaction");
                         transactionAmount = scanner.nextDouble();
-                        expense = new Expense(transactionAmount, DayMonthYear, transactionTitle);
+                        expense = new Expense(transactionAmount, DayMonthYear, (gregorianCalendar.get(Calendar.MONTH) + 1), transactionTitle);
                         expenseStorage.changeFile(existing, expense);
                         keepGoing = false;
                         break;
@@ -202,6 +196,12 @@ public class BudgetTracker {
                     System.out.println("input the name of the expense you want to look for");
                     String search = scanner.next();
                     expenseStorage.searchExpenses(search);
+                    keepGoing = false;
+                    break;
+                case 7:
+                    System.out.println("input the number of the month you wish to see expenses for");
+                    int month = scanner.nextInt();
+                    expenseStorage.readExpensePerMonth(month);
                     keepGoing = false;
                     break;
                 default:
