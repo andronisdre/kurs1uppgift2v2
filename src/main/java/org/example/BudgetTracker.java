@@ -54,7 +54,7 @@ public class BudgetTracker {
                     existing = new Income(transactionTitle);
                     if (incomeStorage.getIncomeList().containsKey(existing.getTitle())) {
                         System.out.println("the title of this income already exists! please write a unique title!");
-                        System.out.println("-------------------------------");
+                        System.out.println("_".repeat(50));
                         incomeStorage.readFile(true, false);
                         System.out.println("write an income unique to the ones listed above");
                         break;
@@ -76,7 +76,7 @@ public class BudgetTracker {
                         keepGoing = false;
                         break;
                     } else System.out.println("this key doesnt exist in the list!");
-                    System.out.println("-------------------------------");
+                    System.out.println("_".repeat(50));
                     break;
                 case 3:
                     incomeStorage.readFile(true, false);
@@ -93,7 +93,7 @@ public class BudgetTracker {
                         keepGoing = false;
                         break;
                     } else System.out.println("this key doesnt exist in the list!");
-                    System.out.println("-------------------------------");
+                    System.out.println("_".repeat(50));
                     break;
                 case 4:
                     incomeStorage.readFile(true, true);
@@ -142,7 +142,7 @@ public class BudgetTracker {
                     existing = new Expense(transactionTitle);
                     if (expenseStorage.getExpenseList().containsKey(existing.getTitle())) {
                         System.out.println("the title of this expense already exists! please write a unique title!");
-                        System.out.println("-------------------------------");
+                        System.out.println("_".repeat(50));
                         expenseStorage.readFile(true, false);
                         System.out.println("write an expense unique to the ones listed above");
                         break;
@@ -164,7 +164,7 @@ public class BudgetTracker {
                         keepGoing = false;
                         break;
                     } else System.out.println("this key doesnt exist in the list!");
-                    System.out.println("-------------------------------");
+                    System.out.println("_".repeat(50));
                     break;
                 case 3:
                     expenseStorage.readFile(true, false);
@@ -181,7 +181,7 @@ public class BudgetTracker {
                         keepGoing = false;
                         break;
                     } else System.out.println("this key doesnt exist in the list!");
-                    System.out.println("-------------------------------");
+                    System.out.println("_".repeat(50));
                     break;
                 case 4:
                     expenseStorage.readFile(true, true);
