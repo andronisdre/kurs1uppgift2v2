@@ -93,9 +93,16 @@ public class IncomeStorage {
             }
             if (!trueorfalse) {
                 System.out.println("this income doesnt exist!");
-                System.out.println("input the name of the income you want to look for");
-                search = BudgetTracker.scanner.next();
-                searchIncomes(search);
+                System.out.println("press 1 if you wish to search again, press 2 to also see a list of all incomes, press 3 to quit program");
+                int wantToContinue = BudgetTracker.scanner.nextInt();
+                if (wantToContinue == 1 || wantToContinue == 2) {
+                    if (wantToContinue == 2) {
+                        readFile(true, false);
+                    }
+                    System.out.println("input the name of the income you want to look for");
+                    search = BudgetTracker.scanner.next();
+                    searchIncomes(search);
+                }
             }
         }
     }

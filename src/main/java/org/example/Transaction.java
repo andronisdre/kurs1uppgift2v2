@@ -25,10 +25,6 @@ public class Transaction {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public String getDate() {
         return date;
     }
@@ -41,15 +37,8 @@ public class Transaction {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
     public int getMonth() {
         return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
     }
 
     @Override

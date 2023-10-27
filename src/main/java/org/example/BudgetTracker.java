@@ -13,13 +13,12 @@ public class BudgetTracker {
     private static ExpenseStorage expenseStorage = new ExpenseStorage();
 
     public static void budgetTracker() throws IOException {
-        System.out.println(gregorianCalendar.get(Calendar.MONTH) + 1);
         incomeStorage.readFile(false, false);
         expenseStorage.readFile(false, false);
         System.out.println("Hello, do you wish to handle incomes or expenses?");
         while (keepGoing) {
             try {
-                System.out.println("press 1 for incomes and 2 for expenses");
+                System.out.println("press 1 for income options and 2 for expense options");
                 int choice = scanner.nextInt();
                 System.out.println("you chose option: " + choice);
                 if (choice == 1) {
@@ -117,7 +116,7 @@ public class BudgetTracker {
                     keepGoing = false;
                     break;
                 default:
-                    System.out.println("you need to choose between option 1 through 5!");
+                    System.out.println("you need to choose between option 1 through 7!");
                     choice = scanner.nextInt();
                     break;
             }
@@ -205,7 +204,7 @@ public class BudgetTracker {
                     keepGoing = false;
                     break;
                 default:
-                    System.out.println("you need to choose between option 1 through 5!");
+                    System.out.println("you need to choose between option 1 through 7!");
                     choice = scanner.nextInt();
                     break;
             }

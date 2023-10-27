@@ -74,9 +74,16 @@ public class ExpenseStorage {
             }
             if (!trueorfalse) {
                 System.out.println("this expense doesnt exist!");
-                System.out.println("input the name of the expense you want to look for");
-                search = BudgetTracker.scanner.next();
-                searchExpenses(search);
+                System.out.println("press 1 if you wish to search again, press 2 to also see a list of all expenses, press 3 to quit program");
+                int wantToContinue = BudgetTracker.scanner.nextInt();
+                if (wantToContinue == 1 || wantToContinue == 2) {
+                    if (wantToContinue == 2) {
+                        readFile(true, false);
+                    }
+                    System.out.println("input the name of the expense you want to look for");
+                    search = BudgetTracker.scanner.next();
+                    searchExpenses(search);
+                }
             }
         }
     }
