@@ -21,7 +21,7 @@ public class ExpenseStorage {
         Reader reader = new FileReader(new File(fileName));
         expenseList = gson.fromJson(reader, type);
         if (andList) {
-            System.out.println("expense List: ");
+            System.out.println("Expense List: ");
             for(String name : expenseList.keySet()) {
                 System.out.print("Key: " + name); if (andValues) System.out.print(expenseList.get(name));
                 System.out.println();
@@ -35,7 +35,7 @@ public class ExpenseStorage {
         FileWriter fw = new FileWriter(new File(fileName));
         gson.toJson(expenseList, fw);
         fw.close();
-        System.out.println("expense saved!");
+        System.out.println("Expense saved!");
     }
 
     public void removeFile(Expense expense) throws IOException {
@@ -43,7 +43,7 @@ public class ExpenseStorage {
         FileWriter fw = new FileWriter(new File(fileName));
         gson.toJson(expenseList, fw);
         fw.close();
-        System.out.println("expense removed!");
+        System.out.println("Expense removed!");
     }
     public void changeFile(Expense existing, Expense expense) throws IOException {
         expenseList.remove(existing.getTitle());
@@ -51,7 +51,7 @@ public class ExpenseStorage {
         FileWriter fw = new FileWriter(new File(fileName));
         gson.toJson(expenseList, fw);
         fw.close();
-        System.out.println("expense changed!");
+        System.out.println("Expense changed!");
     }
 
     public Map<String, Expense> getExpenseList() {
@@ -61,26 +61,25 @@ public class ExpenseStorage {
     public void searchExpenses(String search) throws IOException {
         readFile(false, false);
         if (expenseList.containsKey(search)) {
-            System.out.println("this expense matches your input: Key: " + search + expenseList.get(search));
+            System.out.println("This expense matches your input: Key: " + search + expenseList.get(search));
         } else {
-            boolean yesorno;
-            boolean trueorfalse = false;
-            for(String name : expenseList.keySet()) {
-                yesorno = name.toLowerCase().startsWith(search.toLowerCase());
-                if (yesorno) {
-                    System.out.println("this expense starts with your input: key: " + name + expenseList.get(name));
-                    trueorfalse = true;
+            boolean exists = false;
+            for(String title : expenseList.keySet()) {
+                boolean startsWithSearchKey = title.toLowerCase().startsWith(search.toLowerCase());
+                if (startsWithSearchKey) {
+                    System.out.println("This expense starts with your input: key: " + title + expenseList.get(title));
+                    exists = true;
                 }
             }
-            if (!trueorfalse) {
-                System.out.println("this expense doesnt exist!");
-                System.out.println("press 1 if you wish to search again, press 2 to also see a list of all expenses, press 3 to quit program");
+            if (!exists) {
+                System.out.println("This expense doesnt exist!");
+                System.out.println("Press 1 if you wish to search again, press 2 to also see a list of all expenses, press 3 to quit program");
                 int wantToContinue = BudgetTracker.scanner.nextInt();
                 if (wantToContinue == 1 || wantToContinue == 2) {
                     if (wantToContinue == 2) {
                         readFile(true, false);
                     }
-                    System.out.println("input the name of the expense you want to look for");
+                    System.out.println("Input the name of the expense you want to look for");
                     search = BudgetTracker.scanner.next();
                     searchExpenses(search);
                 }
@@ -89,17 +88,17 @@ public class ExpenseStorage {
     }
     public void readExpensePerMonth(int month) throws IOException {
         readFile(false, false);
-        System.out.println("expenses in month: " + month);
-        boolean trueornah = false;
+        boolean monthHasExpenses = false;
+        System.out.println("Expenses in month: " + month);
         for(String name : expenseList.keySet()) {
             if (expenseList.get(name).getMonth() == month) {
                 System.out.print("Key: " + name); System.out.print(expenseList.get(name));
                 System.out.println();
-                trueornah = true;
+                monthHasExpenses = true;
             }
         }
-        if (!trueornah) {
-            System.out.println("no expenses in the month you typed!");
+        if (!monthHasExpenses) {
+            System.out.println("No expenses in the month you typed!");
         }
     }
 }
