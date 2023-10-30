@@ -16,20 +16,29 @@ public class IncomeStorage {
     public IncomeStorage() {
     }
 
+    public Map<String, Income> getIncomeList() {
+        return incomeList;
+    }
+
     public void readFile(boolean andList, boolean andValues) throws IOException {
         Type type = new TypeToken<Map<String, Income>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         incomeList = gson.fromJson(reader, type);
-
         if (andList) {
+            boolean exists = false;
             System.out.println("Income List:");
             for(String name : incomeList.keySet()) {
                 System.out.print("Key: " + name); if (andValues) System.out.print(incomeList.get(name));
                 System.out.println();
+                exists = true;
+            }
+            if (!exists) {
+                System.out.println("There are no incomes in the list yet");
+                System.out.println("You must add incomes first");
+                BudgetTracker.setKeepGoing(false);
             }
         }
     }
-
 
     public void saveFile(Income income) throws IOException {
         incomeList.put(income.getTitle(), income);
@@ -46,6 +55,7 @@ public class IncomeStorage {
         fw.close();
         System.out.println("Income removed!");
     }
+
     public void changeFile(Income existing, Income income) throws IOException {
         //incomeList.replace(existing.getTitle(), income);
         incomeList.remove(existing.getTitle());
@@ -55,6 +65,7 @@ public class IncomeStorage {
         fw.close();
         System.out.println("Income changed!");
     }
+
     public void incomesSubtractedByExpenses() throws IOException {
         readFile(false, false);
         double totalAmountIncomes = 0;
@@ -74,9 +85,6 @@ public class IncomeStorage {
         System.out.println("Incomes subtracted by expenses: " + (totalAmountIncomes - totalAmountExpenses));
     }
 
-    public Map<String, Income> getIncomeList() {
-        return incomeList;
-    }
     public void searchIncomes(String search) throws IOException {
         readFile(false, false);
         if (incomeList.containsKey(search)) {
@@ -98,13 +106,16 @@ public class IncomeStorage {
                     if (wantToContinue == 2) {
                         readFile(true, false);
                     }
-                    System.out.println("Input the name of the income you want to look for");
-                    search = BudgetTracker.scanner.next();
-                    searchIncomes(search);
+                    if (BudgetTracker.isKeepGoing()) {
+                        System.out.println("Input the name of the income you want to look for");
+                        search = BudgetTracker.scanner.next();
+                        searchIncomes(search);
+                    }
                 }
             }
         }
     }
+
     public void readIncomePerMonth(int month) throws IOException {
         readFile(false, false);
         boolean monthHasIncomes = false;

@@ -68,6 +68,9 @@ public class BudgetTracker {
                     }
                 case 2:
                     incomeStorage.readFile(true, false);
+                    if (!keepGoing) {
+                        break;
+                    }
                     System.out.println("Type one of the keys in the list above to remove that income from the list");
                     transactionTitle = scanner.next();
                     existing = new Income(transactionTitle);
@@ -80,6 +83,9 @@ public class BudgetTracker {
                     break;
                 case 3:
                     incomeStorage.readFile(true, false);
+                    if (!keepGoing) {
+                        break;
+                    }
                     System.out.println("Type one of the keys in the list above to change that incomes values");
                     transactionTitle = scanner.next();
                     existing = new Income(transactionTitle);
@@ -155,6 +161,9 @@ public class BudgetTracker {
                     }
                 case 2:
                     expenseStorage.readFile(true, false);
+                    if (!keepGoing) {
+                        break;
+                    }
                     System.out.println("Type one of the keys in the list above to remove that expense from the list");
                     transactionTitle = scanner.next();
                     existing = new Expense(transactionTitle);
@@ -167,6 +176,9 @@ public class BudgetTracker {
                     break;
                 case 3:
                     expenseStorage.readFile(true, false);
+                    if (!keepGoing) {
+                        break;
+                    }
                     System.out.println("Type one of the keys in the list above to change that expenses values");
                     transactionTitle = scanner.next();
                     existing = new Expense(transactionTitle);
@@ -208,6 +220,14 @@ public class BudgetTracker {
                     break;
             }
         }
+    }
+
+    public static void setKeepGoing(boolean keepGoing) {
+        BudgetTracker.keepGoing = keepGoing;
+    }
+
+    public static boolean isKeepGoing() {
+        return keepGoing;
     }
 }
 

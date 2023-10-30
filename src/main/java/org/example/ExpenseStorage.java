@@ -16,19 +16,29 @@ public class ExpenseStorage {
     public ExpenseStorage() {
     }
 
+    public Map<String, Expense> getExpenseList() {
+        return expenseList;
+    }
+
     public void readFile(boolean andList, boolean andValues) throws IOException {
         Type type = new TypeToken<Map<String, Expense>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
         expenseList = gson.fromJson(reader, type);
         if (andList) {
+            boolean exists = false;
             System.out.println("Expense List: ");
             for(String name : expenseList.keySet()) {
                 System.out.print("Key: " + name); if (andValues) System.out.print(expenseList.get(name));
                 System.out.println();
+                exists = true;
+            }
+            if (!exists) {
+                System.out.println("There are no expenses in the list yet");
+                System.out.println("You must add expenses first");
+                BudgetTracker.setKeepGoing(false);
             }
         }
     }
-
 
     public void saveFile(Expense expense) throws IOException {
         expenseList.put(expense.getTitle(), expense);
@@ -45,6 +55,7 @@ public class ExpenseStorage {
         fw.close();
         System.out.println("Expense removed!");
     }
+
     public void changeFile(Expense existing, Expense expense) throws IOException {
         expenseList.remove(existing.getTitle());
         expenseList.put(expense.getTitle(), expense);
@@ -52,10 +63,6 @@ public class ExpenseStorage {
         gson.toJson(expenseList, fw);
         fw.close();
         System.out.println("Expense changed!");
-    }
-
-    public Map<String, Expense> getExpenseList() {
-        return expenseList;
     }
 
     public void searchExpenses(String search) throws IOException {
@@ -79,13 +86,16 @@ public class ExpenseStorage {
                     if (wantToContinue == 2) {
                         readFile(true, false);
                     }
-                    System.out.println("Input the name of the expense you want to look for");
-                    search = BudgetTracker.scanner.next();
-                    searchExpenses(search);
+                    if (BudgetTracker.isKeepGoing()) {
+                        System.out.println("Input the name of the expense you want to look for");
+                        search = BudgetTracker.scanner.next();
+                        searchExpenses(search);
+                    }
                 }
             }
         }
     }
+
     public void readExpensePerMonth(int month) throws IOException {
         readFile(false, false);
         boolean monthHasExpenses = false;
