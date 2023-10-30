@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+//refer to comments made in IncomeStorage as classes are quite similar
 public class ExpenseStorage {
     private Map<String, Expense> expenseList;
     private String fileName = "src/main/expense.json";

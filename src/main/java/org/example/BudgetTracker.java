@@ -152,6 +152,7 @@ public class BudgetTracker {
         }
     }
 
+    //refer to comments made in incomeChoices as the methods are quite similar
     public static void expenseChoices(int choice) throws IOException {
         System.out.println("What option regarding expenses do you want to look at?");
         System.out.println("1: add expenses, 2: remove expenses, 3: change expenses, 4: show all expenses, 5: show incomes subtracted by expenses, 6: search for an expense, 7: show expenses in specified month");

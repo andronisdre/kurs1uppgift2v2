@@ -26,11 +26,12 @@ public class IncomeStorage {
     public void readFile(boolean andList, boolean andValues) throws IOException {
         Type type = new TypeToken<Map<String, Income>>(){}.getType();
         Reader reader = new FileReader(new File(fileName));
+        //reads saved files from json so that you can access them in the program with incomeList
         incomeList = gson.fromJson(reader, type);
         if (andList) {
             /*boolean exists is used so that if there are no incomes in the list exists will stay false
             instead of being assigned the value true in the for loop. If false, keepGoing will be set to false.
-            I do this so that if you try for example delete incomes without any existing in the list you will be told so*/
+            I do this so that if you try to for example delete incomes without any existing in the list you will be told so*/
             boolean exists = false;
             System.out.println("Income List:");
             //enhanced for loop. for as many keys that exist in incomeList it will loop and print the name of the keys
@@ -78,6 +79,7 @@ public class IncomeStorage {
     public void incomesSubtractedByExpenses() throws IOException {
         readFile(false, false);
         double totalAmountIncomes = 0;
+        //for every Income in incomeList the for loop will add incomes amount to the variable totalAmountIncomes
         for (String name : incomeList.keySet()) {
             Income income = incomeList.get(name);
             totalAmountIncomes += income.getAmount();
@@ -86,6 +88,7 @@ public class IncomeStorage {
         ExpenseStorage expenseStorage = new ExpenseStorage();
         expenseStorage.readFile(false, false);
         double totalAmountExpenses = 0;
+        //same as previous for loop but to get expenses amounts instead of incomes
         for (String name : expenseStorage.getExpenseList().keySet()) {
             Expense expense = expenseStorage.getExpenseList().get(name);
             totalAmountExpenses += expense.getAmount();
@@ -96,10 +99,13 @@ public class IncomeStorage {
 
     public void searchIncomes(String search) throws IOException {
         readFile(false, false);
+        //in the case String search matches completely with a key in incomeList
         if (incomeList.containsKey(search)) {
             System.out.println("This income matches your input: Key: " + search + incomeList.get(search));
         } else {
             boolean exists = false;
+            /*for all the keys in incomeList, in the case that String search in lowercase matches
+            with the start of key name in lowercase, for loop will print out incomes that start with input*/
             for(String name : incomeList.keySet()) {
                 boolean startsWithSearchKey = name.toLowerCase().startsWith(search.toLowerCase());
                 if (startsWithSearchKey) {
@@ -107,6 +113,7 @@ public class IncomeStorage {
                     exists = true;
                 }
             }
+            //if neither of above if statements are true you will be given the option to search again below
             if (!exists) {
                 System.out.println("This income doesnt exist!");
                 System.out.println("Press 1 if you wish to search again, press 2 to also see a list of all incomes, press 3 to quit program");
@@ -115,6 +122,7 @@ public class IncomeStorage {
                     if (wantToContinue == 2) {
                         readFile(true, false);
                     }
+                    //if list was read and is empty, this will not run
                     if (BudgetTracker.isKeepGoing()) {
                         System.out.println("Input the name of the income you want to look for");
                         search = BudgetTracker.scanner.next();
@@ -127,6 +135,7 @@ public class IncomeStorage {
 
     public void readIncomePerMonth(int month) throws IOException {
         readFile(false, false);
+        //monthHasIncomes will remain false if no keys in the month int exist
         boolean monthHasIncomes = false;
         System.out.println("Incomes in month: " + month);
         for(String name : incomeList.keySet()) {
